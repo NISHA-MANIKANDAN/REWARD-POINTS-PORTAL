@@ -1,0 +1,37 @@
+.fully{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.rightside{
+    display: flex;
+    flex:10;
+    flex-direction: column;
+    
+    
+    
+    
+}
+.leftside{
+    display: flex;
+    flex-direction: row;
+    
+    flex :2;
+}
+.upside{
+   
+    
+    flex:1;
+    position: fixed;
+    
+     
+
+}
+.downside{
+    
+    height:  625px;
+    margin-top: 115px;
+    
+
+
+}
