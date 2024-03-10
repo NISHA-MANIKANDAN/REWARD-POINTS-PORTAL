@@ -1,4 +1,4 @@
-import Fully from "./components/Overall/over.jsx";
+import Fully from "./components/overall/overall.jsx";
 
 
 function App() {
