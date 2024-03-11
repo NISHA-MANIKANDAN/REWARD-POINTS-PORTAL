@@ -5,15 +5,20 @@ import Button from '@mui/material/Button';
 import MyImage from './image.jpg';
 import './eventrequest.css';
 import Forms from "../eventrequest/forms.jsx";
-import EventDetails from "./eventdetails"; // Import your EventDetails component
+import EventDetails from "./eventdetails.jsx";
 
 function EventRequest() {
   const [isContentVisible, setIsContentVisible] = useState(true);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false); // New state
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const eventRequested = () => {
     setIsContentVisible(false);
-    setIsFormSubmitted(false);
+  };
+
+  const handleFormSubmit = () => {
+    
+    
+    setIsFormSubmitted(true);
   };
 
   return (
@@ -25,16 +30,21 @@ function EventRequest() {
         <div className="body">
           {isContentVisible ? (
             <div className="event-request">
-              <img src={MyImage} alt="My Image" className="event-request-image" />
+              <img src={MyImage} alt="pic" className="event-request-image" />
               <div className="event-request-inner">
                 <Button onClick={eventRequested}>
                   Create Request
                 </Button>
               </div>
             </div>
-          ) :(
-            <div className="category-page">
-              <Forms />
+          ) : (
+            <div className="form-page">
+              {isFormSubmitted ? (
+                <EventDetails />
+
+              ) : (
+                <Forms onSubmit={handleFormSubmit} />
+              )}
             </div>
           )}
         </div>

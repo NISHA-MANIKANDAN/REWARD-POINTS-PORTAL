@@ -8,9 +8,16 @@ import Forms from "./forms.jsx";
 
 function EventRequest() {
   const [isContentVisible, setIsContentVisible] = useState(true);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const eventRequested = () => {
     setIsContentVisible(false);
+  };
+
+  const handleFormSubmit = () => {
+    
+    setIsContentVisible(true);
+    setIsFormSubmitted(true);
   };
 
   return (
@@ -22,18 +29,20 @@ function EventRequest() {
         <div className="body">
           {isContentVisible ? (
             <div className="event-request">
-              <img src={MyImage} alt="My Image" className="event-request-image" />
+              <img src={MyImage} alt="pic" className="event-request-image" />
               <div className="event-request-inner">
-                <Button onClick={eventRequested} >
+                <Button onClick={eventRequested}>
                   Create Request
                 </Button>
               </div>
             </div>
           ) : (
-            <div className="category-page">
-                <Forms />
-              
-              
+            <div className="form-page">
+              {isFormSubmitted ? (
+                <p>Form submitted successfully!</p>
+              ) : (
+                <Forms onSubmit={handleFormSubmit} />
+              )}
             </div>
           )}
         </div>
