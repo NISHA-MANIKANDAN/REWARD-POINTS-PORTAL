@@ -6,7 +6,7 @@
     
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 290px;
+    margin-left: 0px;
     position: fixed;
     top: 0; /* Set top to 0 to make it fixed at the top of the viewport */
     width: 100%;

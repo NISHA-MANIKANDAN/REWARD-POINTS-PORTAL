@@ -8,14 +8,14 @@ import { FaBars } from 'react-icons/fa';
 
 
 const VerticalNavbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showtoggle, setshowtoogle] = useState(false);
 
   const [selectedField, setSelectedField] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
-    setShowMenu(!showMenu);
+    setshowtoggle(!showtoggle);
   };
 
  
@@ -38,10 +38,10 @@ const VerticalNavbar = () => {
         
         <h3 className='heading'>REWARD POINTS</h3> 
        
-      <div className="menu-icon" onClick={toggleMenu}>
+      <div className="toggle-icon" onClick={toggleMenu}>
         <FaBars />
       </div>
-      <ul className={showMenu ? 'nav-links show' : 'nav-links'}>
+      <ul className={showtoggle ? 'nav-links show' : 'nav-links'}>
 
 
         <li className={selectedField === 'myevents' ? 'selected' : ''} 
@@ -50,7 +50,7 @@ const VerticalNavbar = () => {
           <b>My events </b>
         </li>
 
-        {/* inventory_nav */}
+        
 
         <li className={selectedField === 'eventrequest' ? 'selected' : ''}
         onClick={() => handleNavigate('/eventrequest')}>
@@ -58,7 +58,7 @@ const VerticalNavbar = () => {
           <b>Event request</b>
         </li>
 
-        {/* enquiries_nav */}
+        =
 
         <li className={selectedField === 'reports' ? 'selected' : ''} 
         onClick={() => handleNavigate('/reports')}>
