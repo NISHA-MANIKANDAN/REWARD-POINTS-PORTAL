@@ -8,7 +8,7 @@ import { FaBars } from 'react-icons/fa';
 
 
 const VerticalNavbar = () => {
-  const [showtoggle, setshowtoogle] = useState(false);
+  const [showtoggle, setshowtoggle] = useState(false);
 
   const [selectedField, setSelectedField] = useState(null);
   const location = useLocation();
