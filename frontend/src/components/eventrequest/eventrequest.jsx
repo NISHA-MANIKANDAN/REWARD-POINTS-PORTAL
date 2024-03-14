@@ -6,7 +6,9 @@ import MyImage from './image.jpg';
 import './eventrequest.css';
 import Forms from "./forms.jsx";
 
-function EventRequest() {
+
+
+function EventRequest(formData) {
   const [isContentVisible, setIsContentVisible] = useState(true);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
@@ -15,7 +17,7 @@ function EventRequest() {
   };
 
   const handleFormSubmit = () => {
-    
+
     setIsContentVisible(true);
     setIsFormSubmitted(true);
   };

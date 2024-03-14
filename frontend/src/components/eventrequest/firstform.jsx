@@ -1,8 +1,9 @@
 import React from "react";
 import './form.css';
-
 function FirstForm({ formData, setFormData }) {
+  
   return (
+  
     <div className="sign-up-container">
     < div className="leftform3">
     <label htmlFor="Faculty Name"> Name of the Faculty<span className="Asterisk">*</span> </label>
@@ -23,9 +24,10 @@ function FirstForm({ formData, setFormData }) {
     }}
   />
   
-    <label htmlFor=" Faculty Id "> Faculty Id  <span className="Asterisk">*</span>  </label>
+    <label htmlFor=" FacultyId "> Faculty Id  <span className="Asterisk">*</span>  </label>
   <input
     type="text"
+    id="FacultyId"
     placeholder="AB1000"
     value={formData.Faculty_id}
     onChange={(event) =>
@@ -40,7 +42,6 @@ function FirstForm({ formData, setFormData }) {
       
     }}
   />
- 
   
   <label htmlFor="Email"> E-Mail id <span className="Asterisk">*</span></label>
   <input
@@ -80,11 +81,11 @@ function FirstForm({ formData, setFormData }) {
    
   </div>
   < div className="Rightform">
-  <label htmlFor="Saluation ">  Saluation <span className="Asterisk">*</span></label>
+  <label htmlFor="salutation ">  Saluation <span className="Asterisk">*</span></label>
   <input
     type="text"
     placeholder="Select"
-    value={formData.saluation}
+    value={formData.salutation}
     onChange={(event) =>
       setFormData({ ...formData, saluation: event.target.value })
     }
@@ -130,11 +131,16 @@ function FirstForm({ formData, setFormData }) {
       
     }}
   />
- 
+  
+   
+
 </div>
 </div>
 
+
   );
+
 }
+
 
 export default FirstForm;

@@ -17,6 +17,7 @@ Router.get('/events', (req, res) => {
         connection.release()
 
     })
+  
 })
 Router.get('/event_status', (req, res) => {
     pool.getConnection((err, conn) => {
@@ -24,8 +25,23 @@ Router.get('/event_status', (req, res) => {
         var connection = conn
         var response = ""
         var current_status = 0
-        connection.query("SELECT e.name ,e.event_status,es.name status from event e inner join event_status es ON e.event_status = es.id ", (err, rows, fields) => {
-            response+=rows[0]["name"]+"--->"+rows[0]["status"]+" "+"pending"
+        var approval_status = ["Event Approval","Faculty Approval","Student Registration","Attendance Opening","Attendance Updation","Points Updation","Rewards Results"]
+        connection.query("SELECT e.name ,e.event_status from event e ", (err, rows, fields) => {
+            response+=rows[0]["name"]+" "+"--->"+'<br>'+"<hr>"+"<hr>"
+            for (let i = 1; i < 9; i++) {
+                if(i< rows[0]["event_status"]){
+                    response+=approval_status[i-1]+" "+"completed"+" "+"✔"+"<br>"+"<hr>"
+                }
+                else if(i<8){
+                    response+=approval_status[i-1]+" "+"pending"+" "+"𐄂"+"<br>"+"<hr>"
+                }
+                else if(8 != rows[0]["event_status"] ){
+                    response+="Event is not completed fully"+"<br>"+"<hr>"
+                }
+                else{
+                    response+="Event is completed fully"+"<br>"+"<hr>"
+                }
+            }
             current_status = rows[0]["status"]
             res.send(response);
 

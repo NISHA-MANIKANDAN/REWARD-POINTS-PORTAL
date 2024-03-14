@@ -5,7 +5,9 @@ import ThirdForm from "./thirdform.jsx";
 import FourthForm from "./fourthform.jsx";
 import './form.css';
 
+
 function Forms({ onSubmit }) {
+  
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({
     email: "",
@@ -20,7 +22,7 @@ function Forms({ onSubmit }) {
     facultyDepartment: "",
     facultyPosition: "",
   });
-
+  
   const FormTitles = ["FACULTY DETAILS", "EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
 
   const PageDisplay = () => {
@@ -36,6 +38,8 @@ function Forms({ onSubmit }) {
       default:
         return null;
     }
+    
+    
   };
 
   const renderTrashRequestButton = () => {
@@ -56,7 +60,7 @@ function Forms({ onSubmit }) {
       );
     }
   };
-
+  
   return (
     <div className="form">
       <div className="firstdiv">
@@ -102,7 +106,10 @@ function Forms({ onSubmit }) {
             onClick={() => {
               if (page === FormTitles.length - 1) {
                 alert("FORM SUBMITTED");
-                console.log(formData);
+                console.log(formData.Dept);
+                fetch("http://localhost:3001/event/request",{method:'POST',  headers: {
+                  "Content-Type": "application/json",
+                },body:JSON.stringify(formData),})
                 onSubmit(); // Trigger the onSubmit function when the form is submitted
               } else {
                 setPage((currPage) => currPage + 1);
@@ -113,8 +120,12 @@ function Forms({ onSubmit }) {
           </button>
         </div>
       </div>
+      
     </div>
+    
   );
+  
 }
+
 
 export default Forms;

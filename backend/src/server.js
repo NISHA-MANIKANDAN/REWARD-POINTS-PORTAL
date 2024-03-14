@@ -1,9 +1,17 @@
 const express = require('express')
 const mysql = require('mysql')
 const app = express()
+const cors = require('cors')
 const dbConnection = require('./database.js')
-const event = require('./routes/event.js')
-app.use('/',event)
+const bodyParser = require('body-parser')
+const jsonParser = bodyParser.json()
+const event = require('./routes/events.js')
+const eventRequest = require('./routes/eventRequest.js')
+app.use(cors())
+app.use(jsonParser)
+app.use(event)
+app.use(eventRequest)
+
 dbConnection.getConnection(function(err,conn){
        if(err) throw err
        var connection=conn
@@ -33,9 +41,9 @@ dbConnection.getConnection(function(err,conn){
 })
 
 
-app.listen(3000,(err)=>{
+app.listen(3001,(err)=>{
     if (err) throw err
-    console.log("Server is listening to the port 3000")
+    console.log("Server is listening to the port 3001")
 })
 
   
