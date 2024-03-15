@@ -1,15 +1,30 @@
 import React from "react";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Select from 'react-select';
 import './form.css';
+import config from '../utils/config.json'
 import axios from "axios";
 function FirstForm({ formData, setFormData }) {
-   axios.get()
-  
-   const [selected, setselected]=useState(null)
-   const handleChange = (value) => {
-    setselected(value)
-    console.log(value)
+  const [options, setOptions] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    axios.get(`${config.apiUrl}departments`)
+      .then(function(response){
+        const fetchedOptions = response.data.map(department => ({
+          value: department.name,
+          label: department.name
+        }));
+        setOptions(fetchedOptions);
+      })
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
+  }, []); // Empty dependency array to ensure it runs only once on component mount
+
+  const handleChange = (selectedOption) => {
+    setSelected(selectedOption);
+    setFormData({ ...formData, Dept: selectedOption.value }); // Assuming 'dept' is the key to store department value in formData
   };
   return (
     
@@ -74,16 +89,6 @@ function FirstForm({ formData, setFormData }) {
     options={options}
     value={selected}
     onChange={handleChange}
-   />
-
-   
-  <input
-    type="text"
-    placeholder="XXXXX"
-    value={formData.Dept}
-    onChange={(event) =>
-      setFormData({ ...formData, Dept: event.target.value })
-    }
     style={{
       width: '280%',
       padding: '5px',
@@ -92,9 +97,7 @@ function FirstForm({ formData, setFormData }) {
       marginTop:'7px'
       
     }}
-    />
-    
-   
+   />
   </div>
   < div className="Rightform">
   <label htmlFor="salutation ">  Saluation <span className="Asterisk">*</span></label>

@@ -5,8 +5,8 @@ import ThirdForm from "./thirdform.jsx";
 import FourthForm from "./fourthform.jsx";
 import './form.css';
 import axios from "axios";
-import apiUrl from "../utils/apiUrl.js";
-console.log(apiUrl)
+import config from '../utils/config.json';
+
 function Forms({ onSubmit }) {
   
   const [page, setPage] = useState(0);
@@ -76,6 +76,7 @@ function Forms({ onSubmit }) {
   };
   
   return (
+    
     <div className="form">
       <div className="firstdiv">
         <div className="header">
@@ -119,10 +120,11 @@ function Forms({ onSubmit }) {
           <button className="next-submit-button"
             onClick={() => {
               if (page === FormTitles.length - 1) {
+                console.log(formData)
                 alert("FORM SUBMITTED");
                 //post request to insert form data into database
                 
-                axios.post(`${apiUrl}/event/request`,formData)
+                axios.post(`${config.apiUrl}event/request`,formData)
                 //post request ends
                 onSubmit(); // Trigger the onSubmit function when the form is submitted
               } else {
