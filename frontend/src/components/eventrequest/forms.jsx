@@ -37,7 +37,10 @@ function Forms({ onSubmit }) {
   });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   
+=======
+>>>>>>> 51f5e4bedf224bfd928e9c39bb7cbcaa13c6fb19
 =======
 >>>>>>> 51f5e4bedf224bfd928e9c39bb7cbcaa13c6fb19
 =======
