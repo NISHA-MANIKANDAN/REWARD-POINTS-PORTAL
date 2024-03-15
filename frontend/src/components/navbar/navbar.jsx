@@ -58,7 +58,7 @@ const VerticalNavbar = () => {
           <b>Event request</b>
         </li>
 
-        =
+        
 
         <li className={selectedField === 'reports' ? 'selected' : ''} 
         onClick={() => handleNavigate('/reports')}>
