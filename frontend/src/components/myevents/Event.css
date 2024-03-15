@@ -1,6 +1,6 @@
 .wrap {
     
-    background-color: #F4F7FE;
+    background-color: white;
     display: flex; /* Remove quotes */
     flex-direction: column; 
     flex-wrap: wrap;
@@ -12,7 +12,7 @@
 }
 
 .box {
-    background-color: aqua;
+    background-color:#F4F7FE;
     display: flex;
     flex-direction: column; 
     width: 270px;
@@ -33,24 +33,24 @@
 
 }
 .image{
-    background-color: pink;
-   
+    
+    color: #2B3674;
     margin: 12px 12px 10px 12px;
     height: 100px;
     border-radius: 5px;
 }
 .title{
-    background-color: blue;
+    color: #2B3674;
     margin: 3px 12px 10px 12px;
 
 }
 .timeline{
-    background-color: blueviolet;
+    
     margin: 3px 12px 10px 12px;
 
 }
 .status{
-    background-color: green;
+    color: #2B3674;
     margin: 5px 12px 0px 12px;
 
 }
