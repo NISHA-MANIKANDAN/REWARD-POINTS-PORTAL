@@ -35,16 +35,7 @@ function Forms({ onSubmit }) {
     ref_no: "", // Add ref_no field
     Act_code: "", // Add Act_code field
   });
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
-=======
->>>>>>> 51f5e4bedf224bfd928e9c39bb7cbcaa13c6fb19
-=======
->>>>>>> 51f5e4bedf224bfd928e9c39bb7cbcaa13c6fb19
-=======
->>>>>>> 51f5e4bedf224bfd928e9c39bb7cbcaa13c6fb19
+
   const FormTitles = ["FACULTY DETAILS", "EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
 
   const PageDisplay = () => {
