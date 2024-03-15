@@ -10,6 +10,12 @@ pool.getConnection((err,conn)=>{
             res.send(rows)
         })
     })
+    Router.get('/designations',(req,res)=>{
+        conn.query('SELECT name from designation',(err,rows,fields)=>{
+            if(err) throw err
+            res.send(rows)
+        })
+    })
 })
 
 

@@ -14,7 +14,7 @@ pool.getConnection((err,conn)=>{
                 console.log(designation)
                 updateFaculty()
             })
-            conn.query(`SELECT id from department WHERE name="${req.body.Dept}"`,(err,rows)=>{
+            conn.query(`SELECT id from department WHERE name="${req.body.dept}"`,(err,rows)=>{
                 console.log(rows)
                 department=rows[0]["id"]
                 console.log(department)
@@ -22,7 +22,7 @@ pool.getConnection((err,conn)=>{
             })
             function updateFaculty(){
                 if(department !==undefined && designation !== undefined){
-                    conn.query("INSERT INTO faculty (salutation,name,faculty_id,designation,department,mobile) VALUES (?,?,?,?,?,?)",[req.body.saluation, req.body.Faculty_name, req.body.Faculty_id, designation, department, req.body.Mobile],(err)=>{
+                    conn.query("INSERT INTO faculty (salutation,name,faculty_id,designation,department,mobile) VALUES (?,?,?,?,?,?)",[req.body.Salutation, req.body.Faculty_name, req.body.Faculty_id, designation, department, req.body.Mobile],(err)=>{
                            if(err) throw err
                            res.send("Successfully added faculty details")
                        })

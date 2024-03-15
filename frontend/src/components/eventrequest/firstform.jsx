@@ -5,9 +5,12 @@ import './form.css';
 import config from '../utils/config.json'
 import axios from "axios";
 function FirstForm({ formData, setFormData }) {
-  const [options, setOptions] = useState([]);
-  const [selected, setSelected] = useState(null);
-
+  /////////////////////////////////////////////
+  /////////////////////////////////////////////
+  const [deptOptions, setDeptOptions] = useState([]);
+  const [selectedDept, setSelectedDept] = useState(null);
+  const [desigOptions, setDesigOptions] = useState([]);
+  const [selectedDesig, setSelectedDesig] = useState(null);
   useEffect(() => {
     axios.get(`${config.apiUrl}departments`)
       .then(function(response){
@@ -15,17 +18,57 @@ function FirstForm({ formData, setFormData }) {
           value: department.name,
           label: department.name
         }));
-        setOptions(fetchedOptions);
+        setDeptOptions(fetchedOptions);
       })
       .catch(error => {
         console.error('Error fetching departments:', error);
       });
-  }, []); // Empty dependency array to ensure it runs only once on component mount
-
-  const handleChange = (selectedOption) => {
-    setSelected(selectedOption);
-    setFormData({ ...formData, Dept: selectedOption.value }); // Assuming 'dept' is the key to store department value in formData
+  }, []); 
+  // Empty dependency array to ensure it runs only once on component mount
+  const handleDeptChange = (selectedDeptOption) => {
+    setSelectedDept(selectedDeptOption);
+    if (selectedDeptOption) {
+      setFormData({ ...formData, dept: selectedDeptOption.value });
+    }
   };
+ useEffect(() => {
+    axios.get(`${config.apiUrl}designations`)
+      .then(function(response){
+        const fetchedOptions = response.data.map(designation => ({
+          value: designation.name,
+          label: designation.name
+        }));
+        setDesigOptions(fetchedOptions);
+      })
+      .catch(error => {
+        console.error('Error fetching departments:', error);
+      });
+  }, []); 
+
+  const handleDesigChange = (selectedDesigOption) => {
+    setSelectedDesig(selectedDesigOption);
+    setFormData({ ...formData,Designation: selectedDesigOption.value }); 
+  }
+
+  //////////////////////////////////////////////
+  ///////////////////////////////////
+  /////////////////////////////////////
+ 
+
+ 
+  //////////////////////////////////////
+  //////////////////////////////////////
+  const salutationOptions = [
+  {value:"Mr.",label:"Mr."},
+  {value:"Mrs.",label:"Mrs."},
+  {value:"Ms.",label:"Ms."}
+]
+const [selectedSal, setSelectedSal] = useState(null);
+
+  const handleSalChange = (selectedDesigOption) => {
+    setSelectedSal(selectedDesigOption);
+    setFormData({ ...formData,Salutation: selectedDesigOption.value }); 
+  }
   return (
     
     <div className="sign-up-container">
@@ -86,54 +129,24 @@ function FirstForm({ formData, setFormData }) {
     />
     <label htmlFor="Dept"> Department <span className="Asterisk">*</span></label>
     <Select
-    options={options}
-    value={selected}
-    onChange={handleChange}
-    style={{
-      width: '280%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
+    options={deptOptions}
+    value={selectedDept}
+    onChange={handleDeptChange}
    />
   </div>
   < div className="Rightform">
   <label htmlFor="salutation ">  Saluation <span className="Asterisk">*</span></label>
-  <input
-    type="text"
-    placeholder="Select"
-    value={formData.salutation}
-    onChange={(event) =>
-      setFormData({ ...formData, saluation: event.target.value })
-    }
-    style={{
-      width: '300%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-  />
+  <Select
+    options={salutationOptions}
+    value={selectedSal}
+    onChange={handleSalChange}
+   />
 <label htmlFor="Designation "> Designation  </label>
-  <input
-    type="text"
-    placeholder="Select"
-    value={formData.Designation }
-    onChange={(event) =>
-      setFormData({ ...formData, Designation : event.target.value })
-    }
-    style={{
-      width: '300%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-  />
+<Select
+    options={desigOptions}
+    value={selectedDesig}
+    onChange={handleDesigChange}
+   />
   <label htmlFor="Mobile "> Mobile No </label>
   <input
     type="numbers"
@@ -160,6 +173,5 @@ function FirstForm({ formData, setFormData }) {
   );
 
 }
-
 
 export default FirstForm;
