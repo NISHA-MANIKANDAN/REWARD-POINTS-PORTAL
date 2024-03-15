@@ -19,8 +19,21 @@ function Forms({ onSubmit }) {
     facultyName: "",
     facultyDepartment: "",
     facultyPosition: "",
+    Select_Type: "", // Add Select_Type field
+    Category: "", // Add Category field
+    mode: "", // Add mode field
+    Activity: "", // Add Activity field
+    Event_Name: "", // Add Event_Name field
+    Details: "", // Add Details field
+    Start_Date: "", // Add Start_Date field
+    End_Date: "", // Add End_Date field
+    Duration: "", // Add Duration field
+    Number: "", // Add Number field
+    Points: "", // Add Points field
+    Document: null, // Add Document field
+    ref_no: "", // Add ref_no field
+    Act_code: "", // Add Act_code field
   });
-
   const FormTitles = ["FACULTY DETAILS", "EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
 
   const PageDisplay = () => {
