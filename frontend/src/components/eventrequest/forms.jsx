@@ -119,6 +119,7 @@ function Forms({ onSubmit }) {
               if (page === FormTitles.length - 1) {
                 alert("FORM SUBMITTED");
                 //post request to insert form data into database
+                
                 axios.post('http://localhost:3001/event/request',formData)
                 //post request ends
                 onSubmit(); // Trigger the onSubmit function when the form is submitted

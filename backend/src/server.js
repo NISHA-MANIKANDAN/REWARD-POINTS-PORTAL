@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
 const event = require('./routes/events.js')
 const eventRequest = require('./routes/eventRequest.js')
+require('')
 app.use(cors())
 app.use(jsonParser)
 app.use(event)
@@ -39,7 +40,7 @@ dbConnection.getConnection(function(err,conn){
     
 
 })
-
+console.log(process.env.API)
 
 app.listen(3001,(err)=>{
     if (err) throw err
