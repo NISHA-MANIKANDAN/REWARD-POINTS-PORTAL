@@ -35,7 +35,6 @@ function Forms({ onSubmit }) {
     ref_no: "", // Add ref_no field
     Act_code: "", // Add Act_code field
   });
-
   const FormTitles = ["FACULTY DETAILS", "EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
 
   const PageDisplay = () => {
