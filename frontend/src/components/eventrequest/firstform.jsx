@@ -1,9 +1,21 @@
 import React from "react";
+import { useState } from "react";
+import Select from 'react-select';
 import './form.css';
 function FirstForm({ formData, setFormData }) {
+   const options = [
+    { value: 'IN', label: 'India' },
+    { value: 'CAN', label: 'Canada' },
+    { value: 'JPN', label: 'Japan' },
+   ]
   
+   const [selected, setselected]=useState(null)
+   const handleChange = (value) => {
+    setselected(value)
+    console.log(value)
+  };
   return (
-  
+    
     <div className="sign-up-container">
     < div className="leftform3">
     <label htmlFor="Faculty Name"> Name of the Faculty<span className="Asterisk">*</span> </label>
@@ -61,6 +73,13 @@ function FirstForm({ formData, setFormData }) {
     }}
     />
     <label htmlFor="Dept"> Department <span className="Asterisk">*</span></label>
+    <Select
+    options={options}
+    value={selected}
+    onChange={handleChange}
+   />
+
+   
   <input
     type="text"
     placeholder="XXXXX"
