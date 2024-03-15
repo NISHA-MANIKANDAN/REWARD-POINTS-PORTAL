@@ -2,12 +2,9 @@ import React from "react";
 import { useState } from "react";
 import Select from 'react-select';
 import './form.css';
+import axios from "axios";
 function FirstForm({ formData, setFormData }) {
-   const options = [
-    { value: 'IN', label: 'India' },
-    { value: 'CAN', label: 'Canada' },
-    { value: 'JPN', label: 'Japan' },
-   ]
+   axios.get()
   
    const [selected, setselected]=useState(null)
    const handleChange = (value) => {
