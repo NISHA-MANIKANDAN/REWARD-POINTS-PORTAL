@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select"
-import './form.css'
+import Select from "react-select";
+import './form.css';
 import axios from "axios";
 import config from "../utils/config.json"
 
