@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Event.css';
 import MyImage from './image.jpg';
 import Attendance from "./attendance/Attendance.jsx";
 
 import { Link } from 'react-router-dom';
 
-const EventDetails = () => {
+const EventDetails = ({name,status}) => {
   const [showAttendance, setShowAttendance] = useState(false);
-
   const handleViewAttendanceClick = () => {
     setShowAttendance(true);
   };
@@ -28,12 +27,14 @@ const EventDetails = () => {
                 <img src={MyImage} alt="pic" className="event-request-image" style={{ width: '100%', height: '100%' }} /> 
               </div>
               <div className='title'>
-                AI TECHNOLOGY
+                {name}
                 {/* Use Link component to navigate to the attendance page */}
+                <br></br>
+                <br></br>
                 <Link onClick={handleViewAttendanceClick}>View Attendance</Link>
               </div>
               <div className='timeline'>timeline</div>
-              <div className='status'>FACULTY APPROVAL PENDING</div>
+              <div className='status'>{status}</div>
             </div> 
           </div>
         </div>

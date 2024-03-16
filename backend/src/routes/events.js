@@ -19,6 +19,26 @@ Router.get('/events', (req, res) => {
     })
   
 })
+pool.getConnection((err,conn)=>{
+    Router.get('/eventCard',(req,res)=>{
+        let response=[]
+        let event_status = ["Event Approval","Faculty Approval","Student Registration","Attendance Opening","Attendance Updation","Points Updation","Rewards Results"]
+        conn.query(`SELECT name,event_status FROM event `,(err,rows)=>{
+            if(err) throw err
+            console.log(rows)
+            for (let i = 0; i < rows.length; i++) {
+                if(rows[i]['event_status']<8){
+                    response.push({name:rows[i]["name"],status:event_status[rows[i]['event_status']]+" Pending"})       
+                }
+                else{
+                    response.push({name:rows[i]["name"],status:"Event is Completed"}) 
+                }   
+            }
+           res.send(response)
+        })
+    })
+    conn.release()
+})
 Router.get('/event_status', (req, res) => {
     pool.getConnection((err, conn) => {
         if (err) throw err
