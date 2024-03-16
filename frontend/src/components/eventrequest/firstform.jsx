@@ -1,177 +1,210 @@
-import React from "react";
-import { useState ,useEffect} from "react";
-import Select from 'react-select';
-import './form.css';
-import config from '../utils/config.json'
+import React, { useEffect, useState } from "react";
+import Select from "react-select"
+import './form.css'
 import axios from "axios";
-function FirstForm({ formData, setFormData }) {
-  /////////////////////////////////////////////
-  /////////////////////////////////////////////
-  const [deptOptions, setDeptOptions] = useState([]);
-  const [selectedDept, setSelectedDept] = useState(null);
-  const [desigOptions, setDesigOptions] = useState([]);
-  const [selectedDesig, setSelectedDesig] = useState(null);
-  useEffect(() => {
-    axios.get(`${config.apiUrl}departments`)
-      .then(function(response){
-        const fetchedOptions = response.data.map(department => ({
-          value: department.name,
-          label: department.name
-        }));
-        setDeptOptions(fetchedOptions);
+import config from "../utils/config.json"
+
+function SecondForm({ formData, setFormData }) {
+    const [typesOfEvent,settypesOfEvent]=useState([])
+    const [selectedType,setSelectedType] = useState(null)
+    useEffect(()=>{
+      axios.get(`${config.apiUrl}typesofevent`)
+      .then((response)=>{
+        const typesOptions = response.data.map((types)=>({
+         value:types.name,
+         label:types.name
+        }))
+        settypesOfEvent(typesOptions)
       })
-      .catch(error => {
-        console.error('Error fetching departments:', error);
-      });
-  }, []); 
-  // Empty dependency array to ensure it runs only once on component mount
-  const handleDeptChange = (selectedDeptOption) => {
-    setSelectedDept(selectedDeptOption);
-    if (selectedDeptOption) {
-      setFormData({ ...formData, dept: selectedDeptOption.value });
+    },[])
+    console.log(typesOfEvent)
+    function handleTypeChange(selectedType){
+        setSelectedType(selectedType)
+        setFormData({...formData,Type:selectedType.value})
     }
-  };
- useEffect(() => {
-    axios.get(`${config.apiUrl}designations`)
-      .then(function(response){
-        const fetchedOptions = response.data.map(designation => ({
-          value: designation.name,
-          label: designation.name
-        }));
-        setDesigOptions(fetchedOptions);
-      })
-      .catch(error => {
-        console.error('Error fetching departments:', error);
-      });
-  }, []); 
+////////////////////////////////////////
 
-  const handleDesigChange = (selectedDesigOption) => {
-    setSelectedDesig(selectedDesigOption);
-    setFormData({ ...formData,Designation: selectedDesigOption.value }); 
+  const [categoryOfEvent,setCategoryOfEvent]=useState([])
+  const [selectedCategory,setSelectedCategory] = useState(null)
+  useEffect(()=>{
+    axios.get(`${config.apiUrl}categories`)
+    .then((response)=>{
+      const categoryOptions = response.data.map((category)=>({
+       value:category.name,
+       label:category.name
+      }))
+      setCategoryOfEvent(categoryOptions)
+    })
+  },[])
+  console.log(categoryOfEvent)
+  function handleCategoryChange(selectedCategory){
+      setSelectedCategory(selectedCategory)
+      setFormData({...formData,Category:selectedCategory.value})
   }
-
-  //////////////////////////////////////////////
+  ////////////////////////////////////
   ///////////////////////////////////
-  /////////////////////////////////////
- 
-
- 
-  //////////////////////////////////////
-  //////////////////////////////////////
-  const salutationOptions = [
-  {value:"Mr.",label:"Mr."},
-  {value:"Mrs.",label:"Mrs."},
-  {value:"Ms.",label:"Ms."}
-]
-const [selectedSal, setSelectedSal] = useState(null);
-
-  const handleSalChange = (selectedDesigOption) => {
-    setSelectedSal(selectedDesigOption);
-    setFormData({ ...formData,Salutation: selectedDesigOption.value }); 
+  const modeOptions=[{
+    value:"ONLINE",
+    label:"ONLINE"
+  },{
+    value:"OFFLINE",
+    label:"OFFLINE"
+  }]
+  const [selectedMode,setSelectedMode]=useState(null)
+  function handleModeChange(selectedMode){
+    setSelectedMode(selectedMode)
+    setFormData({...formData,Mode:selectedMode.value})
   }
-  return (
-    
-    <div className="sign-up-container">
-    < div className="leftform3">
-    <label htmlFor="Faculty Name"> Name of the Faculty<span className="Asterisk">*</span> </label>
-  <input
-    type="text"
-    placeholder="ACBCD E"
-    value={formData.Faculty_name}
-    onChange={(event) =>
-      setFormData({ ...formData, Faculty_name: event.target.value })
-    }
-    style={{
-      width: '280%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-  />
+  /////////////////////////////////////
+  /////////////////////////////////////
+  const activityOptions=[{
+    value:"HONOR POINTS",
+    label:"HONOR POINTS"
+  },{
+    value:"REWARD POINTS",
+    label:"REWARD POINTS"
+  }]
+  const [selectedActivity,setSelectedActivity]=useState(null)
+  function handleActivityChange(selectedActivity){
+    setSelectedActivity(selectedActivity)
+    setFormData({...formData,Activity:selectedActivity.value})
+  }
+
+    return (
+      <div className="sign-up-container">
+          < div className="leftform">
+          <label htmlFor="Event_type"> Type of Event <span className="Asterisk">*</span></label>
+          <Select
+          options={typesOfEvent}
+          value={selectedType}
+          onChange={handleTypeChange}
+          />
+        {/* <input
+          type="text"
+          placeholder="Select Type"
+          value={formData.Select_Type}
+          onChange={(event) =>
+            setFormData({ ...formData, Select_type: event.target.value })
+          }
+          style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'3px',
+            marginTop:'5px'
+          }}
+        /> */}
+         
+        
+        <label htmlFor="Sub_Category"> Sub Category <span className="Asterisk">*</span></label>
+        <Select
+          options={categoryOfEvent}
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          />
+        {/* <input
+          type="text"
+          placeholder="Select Category"
+          value={formData.Category}
+          onChange={(event) =>
+            setFormData({ ...formData, Category: event.target.value })
+          }
+          style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'2px',
+            marginTop:'5px'
+            
+          }}
+          /> */}
+          <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}> If any of the club name is not available in the list' Kindly contact Rewards Team </p>
+          <label htmlFor="Event_mode"> Mode of the Event<span className="Asterisk">*</span> </label>
+          <Select 
+          options={modeOptions}
+          value={selectedMode}
+          onChange={handleModeChange}
+          />
+        {/* <input
+          type="text"
+          placeholder="ONLINE"
+          value={formData.mode}
+          onChange={(event) =>
+            setFormData({ ...formData, mode: event.target.value })
+          }
+          style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'2px',
+            marginTop:'5px'
+            
+          }}
+        /> */}
+          <label htmlFor="Activity_category"> Activity Category <span className="Asterisk">*</span></label>
+          <Select 
+          options={activityOptions}
+          value={selectedActivity}
+          onChange={handleActivityChange}
+          />
+        {/* <input
+          type="text"
+          placeholder="Select Category"
+          value={formData.Activity}
+          onChange={(event) =>
+            setFormData({ ...formData, Activity: event.target.value })
+          }style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'2px',
+            marginTop:'5px'
+            
+          }}
+        /> */}
+        </div>
+        < div className="Rightform">
+        <label htmlFor="Event_name"> Name of the Event <span className="Asterisk">*</span></label>
+        <input
+          type="text"
+          placeholder="AI TECHNOLOGY - FUTURE OF INDUSTRIAL REVOLUTION"
+          value={formData.Event_Name}
+          onChange={(event) =>
+            setFormData({ ...formData, Event_Name: event.target.value })
+          }
+          style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginTop:'5px'
+            
+          }}
+        />
+        <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>Kindly mention the Name of the clubs / Department associations along with the <br /> event name  </p>
+        <label htmlFor="Details"> Details about the Expert </label>
+        <input
+          type="text"
+          placeholder="Default Text"
+          value={formData.Details}
+          onChange={(event) =>
+            setFormData({ ...formData, Details: event.target.value })
+          }
+          style={{
+            width: '100%',
+            
+            padding: '5px 60px 20px 5px',
+            boxSizing: 'border-box',
+            marginTop:'5px'
   
-    <label htmlFor=" FacultyId "> Faculty Id  <span className="Asterisk">*</span>  </label>
-  <input
-    type="text"
-    id="FacultyId"
-    placeholder="AB1000"
-    value={formData.Faculty_id}
-    onChange={(event) =>
-      setFormData({ ...formData, Faculty_id: event.target.value })
-    }
-    style={{
-      width: '280%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-  />
-  
-  <label htmlFor="Email"> E-Mail id <span className="Asterisk">*</span></label>
-  <input
-    type="text"
-    placeholder="abcd@bitsathy.ac.in"
-    value={formData.Email}
-    onChange={(event) =>
-      setFormData({ ...formData, Email: event.target.value })
-    }
-    style={{
-      width: '280%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-    />
-    <label htmlFor="Dept"> Department <span className="Asterisk">*</span></label>
-    <Select
-    options={deptOptions}
-    value={selectedDept}
-    onChange={handleDeptChange}
-   />
-  </div>
-  < div className="Rightform">
-  <label htmlFor="salutation ">  Saluation <span className="Asterisk">*</span></label>
-  <Select
-    options={salutationOptions}
-    value={selectedSal}
-    onChange={handleSalChange}
-   />
-<label htmlFor="Designation "> Designation  </label>
-<Select
-    options={desigOptions}
-    value={selectedDesig}
-    onChange={handleDesigChange}
-   />
-  <label htmlFor="Mobile "> Mobile No </label>
-  <input
-    type="numbers"
-    placeholder="+91 0000000000"
-    value={formData.Mobile }
-    onChange={(event) =>
-      setFormData({ ...formData, Mobile: event.target.value })
-    }style={{
-      width: '300%',
-      padding: '5px',
-      boxSizing: 'border-box',
-      marginBottom:'3px',
-      marginTop:'7px'
-      
-    }}
-  />
-  
-   
+            
+          }}
+        />
+        <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>
+          (THIS IS ONLY FOR QUEST LECTURE)
+        </p>
+      </div>
+      </div>
+    );
+  }
 
-</div>
-</div>
-
-
-  );
-
-}
-
-export default FirstForm;
+export default SecondForm;

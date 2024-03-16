@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import FirstForm from "./firstform.jsx";
-import SecondForm from "./secondform.jsx";
-import ThirdForm from "./thirdform.jsx"; 
-import FourthForm from "./fourthform.jsx";
+import SecondForm from "./secondform.jsx"; 
+import ThirdForm from "./thirdform.jsx";
 import './form.css';
 import axios from "axios";
 import config from '../utils/config.json';
@@ -37,7 +36,7 @@ function Forms({ onSubmit }) {
     ref_no: "", // Add ref_no field
     Act_code: "", // Add Act_code field
   });
-  const FormTitles = ["FACULTY DETAILS", "EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
+  const FormTitles = ["EVENT DETAILS", "TRAINING DETAILS", "EVENT SUMMARY"];
 
   const PageDisplay = () => {
     switch (page) {
@@ -47,8 +46,6 @@ function Forms({ onSubmit }) {
         return <SecondForm formData={formData} setFormData={setFormData} />;
       case 2:
         return <ThirdForm formData={formData} setFormData={setFormData} />;
-      case 3:
-        return <FourthForm formData={formData} setFormData={setFormData} />;
       default:
         return null;
     }

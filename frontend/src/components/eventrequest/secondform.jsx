@@ -1,18 +1,103 @@
-import React from "react";
-import './form.css'
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import './form.css';
 
-function SecondForm({ formData, setFormData }) {
-  
-    return (
-      <div className="sign-up-container">
-          < div className="leftform">
-          <label htmlFor="Event_type"> Type of Event <span className="Asterisk">*</span></label>
+function ThirdForm({ formData, setFormData }) {
+  const handleStartDateChange = (date) => {
+    setFormData({ ...formData, Start_Date: date });
+  };
+
+  const handleEndDateChange = (date) => {
+  setFormData({ ...formData, End_Date: date });
+  };
+
+  return (
+    <div className="sign-up-container">
+      <div className="leftform3">
+        <label htmlFor=""> Start Date & Time <span className="Asterisk">*</span> </label>
+        <DatePicker
+          selected={formData.Start_Date}
+          onChange={handleStartDateChange}
+          showTimeSelect
+          dateFormat="yyyy-MM-dd HH:mm"
+          placeholderText="YYYY-MM-DD --:--"
+          style={{
+            width: '200%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom: '3px',
+            marginTop: '7px',
+          }}
+        />
+        
+        <label htmlFor=""> End Date & Time <span className="Asterisk">*</span>  </label>
+       
+        <DatePicker
+          selected={formData.End_Date}
+          onChange={handleEndDateChange}
+          showTimeSelect
+          dateFormat="yyyy-MM-dd HH:mm"
+          placeholderText="YYYY-MM-DD --:--"
+          style={{
+            width: '200%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom: '3px',
+            marginTop: '7px',
+          }}
+        />
+
+
+        <label htmlFor="Duration"> Duration <span className="Asterisk">*</span></label>
         <input
-          type="text"
-          placeholder="Select Type"
-          value={formData.Select_Type}
+          type="number"
+          placeholder="00"
+          value={formData.Duration}
           onChange={(event) =>
-            setFormData({ ...formData, Select_type: event.target.value })
+            setFormData({ ...formData, Duration: event.target.value })
+          }
+          style={{
+            width: '200%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'3px',
+            marginTop:'7px'
+            
+          }}
+        />
+        <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>DURATION (in hours)</p>
+        
+       
+        
+        <label htmlFor=""> Scheduling Date & Time<span className="Asterisk">*</span>  </label>
+       
+        <DatePicker
+          selected={formData.Schedule}
+          onChange={handleEndDateChange}
+          showTimeSelect
+          dateFormat="yyyy-MM-dd HH:mm"
+          placeholderText="YYYY-MM-DD --:--"
+          style={{
+            width: '200%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom: '3px',
+            marginTop: '7px',
+          }}
+        />
+
+
+      </div>
+
+      <div className="Rightform">
+        <label htmlFor="Number"> NUMBER OF STUDENTS EXPECTED  <span className="Asterisk">*</span></label>
+        <input
+          type="number"
+          placeholder="+91 0000000000"
+          value={formData.Number}
+          onChange={(event) =>
+            setFormData({ ...formData, Number: event.target.value })
           }
           style={{
             width: '100%',
@@ -23,33 +108,30 @@ function SecondForm({ formData, setFormData }) {
             
           }}
         />
-         
+        <label htmlFor="Points"> Maximum Points  </label>
+        <input
+          type="number"
+          placeholder="0000"
+          value={formData.Points}
+          onChange={(event) =>
+            setFormData({ ...formData, Points: event.target.value })
+          }
+          style={{
+            width: '100%',
+            padding: '5px',
+            boxSizing: 'border-box',
+            marginBottom:'3px',
+            marginTop:'5px'
+            
+          }}
+        />
         
-        <label htmlFor="Sub_Category"> Sub Category <span className="Asterisk">*</span></label>
+        <label htmlFor="Document">Attach the Document</label>
         <input
-          type="text"
-          placeholder="Select Category"
-          value={formData.Category}
+          type="file"
+          id="Document"
           onChange={(event) =>
-            setFormData({ ...formData, Category: event.target.value })
-          }
-          style={{
-            width: '100%',
-            padding: '5px',
-            boxSizing: 'border-box',
-            marginBottom:'2px',
-            marginTop:'5px'
-            
-          }}
-          />
-          <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}> If any of the club name is not available in the list' Kindly contact Rewards Team </p>
-          <label htmlFor="Event_mode"> Mode of the Event<span className="Asterisk">*</span> </label>
-        <input
-          type="text"
-          placeholder="Online"
-          value={formData.mode}
-          onChange={(event) =>
-            setFormData({ ...formData, mode: event.target.value })
+            setFormData({ ...formData, Document: event.target.files[0] })
           }
           style={{
             width: '100%',
@@ -60,65 +142,10 @@ function SecondForm({ formData, setFormData }) {
             
           }}
         />
-          <label htmlFor="Activity_category"> Activity Category <span className="Asterisk">*</span></label>
-        <input
-          type="text"
-          placeholder="Select Category"
-          value={formData.Activity}
-          onChange={(event) =>
-            setFormData({ ...formData, Activity: event.target.value })
-          }style={{
-            width: '100%',
-            padding: '5px',
-            boxSizing: 'border-box',
-            marginBottom:'2px',
-            marginTop:'5px'
-            
-          }}
-        />
-        </div>
-        < div className="Rightform">
-        <label htmlFor="Event_name"> Name of the Event <span className="Asterisk">*</span></label>
-        <input
-          type="text"
-          placeholder="AI TECHNOLOGY - FUTURE OF INDUSTRIAL REVOLUTION"
-          value={formData.Event_Name}
-          onChange={(event) =>
-            setFormData({ ...formData, Event_Name: event.target.value })
-          }
-          style={{
-            width: '100%',
-            padding: '5px',
-            boxSizing: 'border-box',
-            marginTop:'5px'
-            
-          }}
-        />
-        <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>Kindly mention the Name of the clubs / Department associations along with the <br /> event name  </p>
-        <label htmlFor="Details"> Details about the Expert </label>
-        <input
-          type="text"
-          placeholder="Default Text"
-          value={formData.Details}
-          onChange={(event) =>
-            setFormData({ ...formData, Details: event.target.value })
-          }
-          style={{
-            width: '100%',
-            
-            padding: '5px 60px 20px 5px',
-            boxSizing: 'border-box',
-            marginTop:'5px'
-  
-            
-          }}
-        />
-        <p style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>
-          (THIS IS ONLY FOR QUEST LECTURE)
-        </p>
+        <p  style={{ fontSize: '16px', color: '#333', marginTop: '2px' }}>Attach the Detailed Description of the event and valuation criteria </p>
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
-export default SecondForm;
+export default ThirdForm;
