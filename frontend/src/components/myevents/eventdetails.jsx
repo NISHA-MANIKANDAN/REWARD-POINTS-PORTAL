@@ -20,6 +20,7 @@ const EventDetails = ({name,status}) => {
         </div>
       ) : (
         // Render the first wrap division when showAttendance is false
+        <div className='hello'>
         <div className='wrap'>
           <div className='wrap1'>
             <div className='box'>
@@ -37,6 +38,7 @@ const EventDetails = ({name,status}) => {
               <div className='status'>{status}</div>
             </div> 
           </div>
+        </div>
         </div>
       )}
     </div>
