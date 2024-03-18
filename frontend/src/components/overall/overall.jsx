@@ -9,7 +9,7 @@ const Fully = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<EventRequest />} />
+        <Route path="/" element={<MyEvents />} />
         <Route path="/myevents" element={<MyEvents />} />
         <Route path="/eventrequest" element={<EventRequest />} />
         <Route path="/reports" element={<Reports />} />
