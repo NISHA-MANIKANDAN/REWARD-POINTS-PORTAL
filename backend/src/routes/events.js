@@ -20,6 +20,7 @@ Router.get('/events', (req, res) => {
   
 })
 pool.getConnection((err,conn)=>{
+    if(err) throw err
     Router.get('/eventCard',(req,res)=>{
         let response=[]
         let event_status = ["Event Approval","Faculty Approval","Student Registration","Attendance Opening","Attendance Updation","Points Updation","Rewards Results"]
