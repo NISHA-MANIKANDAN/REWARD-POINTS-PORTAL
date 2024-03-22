@@ -5,7 +5,7 @@ import Attendance from "./attendance/Attendance.jsx";
 import HorizontalStepper from "./timeline";
 import { Link } from 'react-router-dom';
 
-const EventDetails = ({ name, status }) => {
+const EventDetails = ({ name, status,eventId }) => {
   const [showAttendance, setShowAttendance] = useState(false);
   const handleViewAttendanceClick = () => {
     setShowAttendance(true);
@@ -34,7 +34,7 @@ const EventDetails = ({ name, status }) => {
                   </div>
                 </div>
                 <div className='timeline'>
-                  <HorizontalStepper />
+                  <HorizontalStepper eventId={eventId} />
                 </div>
                 <div className='status'>{status}</div>
               </div>

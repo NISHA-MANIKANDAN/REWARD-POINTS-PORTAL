@@ -68,7 +68,7 @@ function EventRequest() {
              events.length > 0 ? (
                events.map((value, index) => (
                 <div className="form-page">
-                 <EventDetails key={index} name={value["name"]}  status={value["status"]}/>
+                 <EventDetails key={index} name={value["name"]}  status={value["status"]} eventId={value["id"]}/>
                  </div>
                ))
              ) : (

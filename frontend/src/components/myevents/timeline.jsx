@@ -1,5 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import config from "../utils/config.json"
 function HorizontalStepperBar({ currentStage, totalStages }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', overflow: 'hidden' }}>
@@ -43,7 +44,7 @@ function HorizontalStepperBar({ currentStage, totalStages }) {
   );
 }
 
-function HorizontalStepper() {
+function HorizontalStepper({eventId}) {
   const [currentStage, setCurrentStage] = useState(0);
   const [totalStages, setTotalStages] = useState(0);
 
@@ -59,8 +60,17 @@ function HorizontalStepper() {
 
   // Placeholder for the function to fetch stages from the backend
   const fetchStagesFromBackend = async () => {
-    // Replace with your actual backend API call or fetch logic
-    const stagesData = { currentStage: 2, totalStages: 8 }; // Example data
+    let status
+    await axios.get(`${config.apiUrl}getStatus`,{
+      params:{
+        id:eventId
+      }
+    })
+    .then((response)=>{
+      status = response.data[0]["event_status"]
+      
+    })
+    const stagesData = { currentStage: Number(status), totalStages: 8 }; // Example data
     return stagesData;
   };
 
