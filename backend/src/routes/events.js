@@ -82,10 +82,11 @@ Router.get('/event_status', (req, res) => {
 Router.put('/change_state', jsonParser, (req, res) => {
     pool.getConnection((err, conn) => {
         if (err) throw err
-        var connection = conn
-        var status = req.body["status"]
+        let connection = conn
+        let status = req.body["status"]
+        let id = req.body["id"]
         console.log(status)
-        let query = "UPDATE event SET event_status =" + status
+        let query = "UPDATE event SET event_status =" + status +"WHERE id="+id
         connection.query(query)
         connection.release()
 
